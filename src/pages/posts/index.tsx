@@ -1,5 +1,11 @@
-export default function PostList() {
+import Nav from "components/Nav";
+import Footer from "components/footer";
+import PostList from "components/postList";
+
+export default function PostsPage() {
   return(<>
-  포스트 목록이 들어올 자리
+  <Nav/>
+  <PostList hasNavigation={false}/>
+  <Footer/>
   </>)
 }

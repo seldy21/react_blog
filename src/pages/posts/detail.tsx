@@ -1,6 +1,6 @@
-import Nav from "../../components/Nav";
-import Footer from "../../components/footer";
-import PostDetail from "../../components/postDetail";
+import Nav from "components/Nav";
+import Footer from "components/footer";
+import PostDetail from "components/postDetail";
 
 export default function PostPage() {
   return (

@@ -1,5 +1,13 @@
-export default function PostNew(){
-  return(<>
-    새글 작성페이지
-  </>)
+import Nav from "components/Nav";
+import Footer from "components/footer";
+import PostForm from "components/postForm";
+
+export default function PostNew() {
+  return (
+    <>
+      <Nav />
+      <PostForm/>
+      <Footer />
+    </>
+  );
 }
