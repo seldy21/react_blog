@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# 리액트로 블로그 앱을 만들어보자!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+블로그 앱을 만들기
 
 ## Available Scripts
 
