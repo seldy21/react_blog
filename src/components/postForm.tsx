@@ -1,12 +1,21 @@
 export default function PostForm() {
   return (
-    <form className="post__detail">
+    <form className="post__detail" action="/post" method="POST">
       <div className="post__detail-gap">
         <h3>제목</h3>
         <input
           type="text"
           className="post__datail-input"
           name="title"
+          placeholder="제목을 입력하세요"
+        />
+      </div>
+      <div className="post__detail-gap">
+        <h3>요약</h3>
+        <input
+          type="text"
+          className="post__datail-input"
+          name="summary"
           placeholder="제목을 입력하세요"
         />
       </div>
@@ -19,7 +28,7 @@ export default function PostForm() {
         />
       </div>
       <div className="post__detail-btns">
-        <button className="post__detail-submit">확인</button>
+        <button className="post__detail-submit" type="submit">확인</button>
         <button className="post__detail-cancel">취소</button>
       </div>
     </form>

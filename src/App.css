@@ -9,7 +9,9 @@ header {
   border-bottom: 1px solid #efefef;
 }
 
-h3 {
+h3,
+h4,
+h5 {
   margin: 0;
 }
 
@@ -55,8 +57,9 @@ footer a:focus,
 }
 
 .post__list,
-.post__detail {
-  min-height: 88vh;
+.post__detail,
+.login__container {
+  min-height: 86.8vh;
   line-height: 1.5rem;
   padding: 1.5rem;
   max-width: 680px;
@@ -214,7 +217,8 @@ footer a:focus,
   justify-content: end;
 }
 
-.post__detail-btns button {
+.post__detail-btns button,
+.login__wrapper button {
   width: 130px;
   padding: 0.5rem;
   cursor: pointer;
@@ -263,7 +267,7 @@ footer a:focus,
   display: block;
 }
 
-@keyframes fadeIn  {
+@keyframes fadeIn {
   0% {
     opacity: 0.3;
   }
@@ -303,4 +307,48 @@ footer a:focus,
 }
 .carousel__controls label.carousel__slide-next {
   right: 0;
+}
+
+.post__delete {
+  cursor: pointer;
+}
+
+.login__form {
+  padding: 2rem;
+  border: 1px solid #efefef;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: absolute;
+  width: 60vw;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+}
+
+.login__wrapper {
+  text-align: center;
+}
+
+.alert__text {
+  font-size: 0.8rem;
+}
+
+.alert__text a {
+  text-decoration: underline;
+  cursor: pointer;
+  color: rgb(78, 149, 215);
+  transition: 0.3s;
+}
+
+.alert__text a:hover {
+  color: #000;
+}
+
+.login__container {
+  position: relative;
+  background-color: #efefef57;
+  max-width: none;
 }

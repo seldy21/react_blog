@@ -1,12 +1,12 @@
 import Nav from "components/Nav";
 import Footer from "components/footer";
-import PostForm from "components/postForm";
+import LoginForm from "components/loginForm";
 
-export default function PostEdit() {
+export default function Login() {
   return (
     <>
       <Nav />
-      <PostForm />
+      <LoginForm />
       <Footer />
     </>
   );
