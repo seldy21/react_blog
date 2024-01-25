@@ -321,7 +321,8 @@ footer a:focus,
   flex-direction: column;
   gap: 1rem;
   position: absolute;
-  width: 60vw;
+  width: 80vw;
+  max-width: 560px;
   left: 50%;
   top: 45%;
   transform: translate(-50%, -50%);
@@ -351,4 +352,39 @@ footer a:focus,
   position: relative;
   background-color: #efefef57;
   max-width: none;
+}
+
+.validation__text {
+  color: red;
+  font-size: 0.8rem;
+}
+
+.loader {
+  width: 65px;
+  height: 65px;
+  color: rgb(255, 255, 153);
+  position: absolute;
+  z-index: 9999;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* border-top: 5px solid yellow;
+  border-left: 5px solid yellow;
+  border-bottom: 5px solid yellow; */
+  border-radius: 50%;
+  animation: loader.7s linear infinite;
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+.pointer{
+  cursor: pointer;
 }
