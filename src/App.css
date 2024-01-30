@@ -115,6 +115,10 @@ footer a:focus,
   color: gray;
 }
 
+.post__content--pre-wrap {
+  white-space: pre-wrap;
+}
+
 .post__utils-box {
   display: flex;
   gap: 0.5rem;
@@ -125,6 +129,13 @@ footer a:focus,
 
 .post__utils-box > div:hover {
   color: #000;
+}
+
+.post__empty{
+  padding: 24px;
+  text-align: center;
+  border: 1px solid #efefef;
+  border-radius: 20px;
 }
 
 .post__detail .post__profile-box {
@@ -385,7 +396,6 @@ footer a:focus,
     transform: rotate(360deg);
   }
 }
-
 
 .pointer{
   cursor: pointer;

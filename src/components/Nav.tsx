@@ -6,7 +6,7 @@ export default function Nav() {
       <div className="header__logo"><Link to={"/"}>프로젝트 블로그</Link></div>
       <ul className="nav">
         <li>
-          <Link to={"posts/new"}>글쓰기</Link>
+          <Link to={"/posts/new"}>글쓰기</Link>
         </li>
         <li>
           <Link to={"/posts"}>게시글</Link>

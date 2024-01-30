@@ -2,8 +2,10 @@ import { useContext, useState } from "react";
 import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 import { db } from "firebaseApp";
 import AuthContext from "context/authContext";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
-interface postForm {
+export interface postForm {
   title: string;
   summary: string;
   content: string;
@@ -11,6 +13,16 @@ interface postForm {
 
 export default function PostForm() {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const path = useParams();
+
+  // const docRef = doc(db, "posts", path.id)
+
+  const getData = async () => {
+
+  }
+
   const [inputValue, setInputValue] = useState<postForm>({
     title: "",
     summary: "",
@@ -37,10 +49,14 @@ export default function PostForm() {
         createdAt: new Date().toLocaleDateString(),
         email: user?.email
       });
+      toast?.success("게시글을 생성했습니다!")
+      navigate("/");
     } catch (err) {
       console.log(err);
+      toast.error("문제가 발생했습니다. 다시 시도하세요.")
     }
   };
+
   return (
     <div className="post__detail">
       <div className="post__detail-gap">
