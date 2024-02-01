@@ -43,6 +43,7 @@ a {
 footer {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 1rem;
   background-color: #efefef;
   padding: 1rem;
@@ -55,6 +56,12 @@ footer a:focus,
 .nav a:hover,
 .nav a:focus {
   color: #000;
+}
+
+footer .theme__icon {
+  margin-left: auto;
+  font-size: 1.3rem;
+  cursor: pointer;
 }
 
 .post__list,
@@ -81,10 +88,13 @@ footer a:focus,
   display: flex;
   gap: 0.5rem;
   color: gray;
-  cursor: pointer;
   padding: 1.5rem 2rem 0;
   max-width: 680px;
   margin: 0 auto;
+}
+
+.post__navigation div {
+  cursor: pointer;
 }
 
 .post__navigation--active {
@@ -94,7 +104,7 @@ footer a:focus,
 
 .post__box {
   padding: 1.5rem 0;
-  transition: .3s;
+  transition: 0.3s;
 }
 
 .post__profile-box {
@@ -128,11 +138,12 @@ footer a:focus,
   color: gray;
 }
 
-.post__utils-box .post__edit:hover, .post__utils-box .post__delete:hover {
+.post__utils-box .post__edit:hover,
+.post__utils-box .post__delete:hover {
   color: #000;
 }
 
-.post__empty{
+.post__empty {
   padding: 24px;
   text-align: center;
   border: 1px solid #efefef;
@@ -212,6 +223,10 @@ footer a:focus,
   margin: 1.5rem 0;
 }
 
+textarea {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 .post_detail-textarea {
   outline: none;
   border: 1px solid #c4c4c4;
@@ -222,7 +237,6 @@ footer a:focus,
   height: 50vh;
   width: 100%;
   margin-left: 0;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 .post__detail-btns {
@@ -398,19 +412,132 @@ footer a:focus,
   }
 }
 
-.pointer{
+.pointer {
   cursor: pointer;
 }
 
-.post__detail select{
+.post__detail select {
   border: 1px solid lightgray;
   height: 35px;
   border-radius: 10px;
   padding: 0 10px;
 }
 
-.post__category{
-  border:1px solid #efefef;
-  padding:3px 10px;
+.post__category {
+  border: 1px solid #efefef;
+  padding: 3px 10px;
   border-radius: 10px;
+}
+
+/*dark mode*/
+
+.light,
+.dark {
+  transition: all 0.2s linear;
+}
+
+.light {
+  background-color: #fff;
+}
+
+.dark,
+.dark .login__form {
+  background-color: rgb(0, 0, 52);
+}
+
+.dark .login__container,
+.dark footer {
+  background-color: rgba(0, 0, 0, 0.294);
+}
+
+.dark a,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark .profile__box,
+.dark .post__title,
+.dark .post__navigation,
+.dark .post__empty,
+.dark .post__content,
+.dark .alert__text {
+  color: #d9d9d9;
+}
+
+.dark a:hover,
+.dark a:focus,
+.dark .post__delete:hover,
+.dark .post__navigation--active,
+.dark .comment__edit-box span:hover {
+  color: #f2f2f2;
+}
+
+.comment {
+  border-top: 1px solid lightgray;
+  margin-top: 2rem;
+  padding-top: 2rem;
+}
+
+.comment .post__detail-gap {
+  padding-bottom: 2rem;
+}
+
+.comment__text-box {
+  display: flex;
+  gap: 1rem;
+  align-items: end;
+}
+
+.comment__textarea {
+  flex-grow: 1;
+  resize: none;
+  border-radius: 10px;
+  border: rgb(190, 190, 190) 1px solid;
+  padding: 0.4rem 0.7rem;
+  outline: none;
+}
+
+.comment .post__detail-submit {
+  cursor: pointer;
+  padding: 0.2rem 1rem;
+  font-size: 0.8rem;
+}
+
+.comment__edit-box {
+  padding-left: 1rem;
+}
+
+.comment__edit-box span {
+  cursor: pointer;
+}
+
+.comment__edit-box span:hover {
+  color: #000;
+}
+
+.comment__box {
+  padding: 1.2rem 0.5rem 1.5rem;
+  border-top: 1px solid #efefef;
+}
+
+.comment__box-profile {
+  padding-bottom: 0.5rem;
+}
+
+.comment__box-profile,
+.comment__edit-box {
+  display: flex;
+  gap: 0.5rem;
+  color: #8a8a8a;
+}
+
+.comment__box-profile span {
+  font-size: 0.9rem;
+}
+
+.light .comment__content{
+  color: #000;
+}
+
+.dark .comment__content{
+  color: #d9d9d9;
 }

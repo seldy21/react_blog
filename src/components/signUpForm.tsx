@@ -74,7 +74,7 @@ export default function SignUpForm() {
       <div className="login__form">
         <h2>회원가입</h2>
         <div className="post__detail-gap">
-          <h3>아이디</h3>
+          <h4>아이디</h4>
           <input
             type="text"
             className="post__datail-input"
@@ -85,7 +85,7 @@ export default function SignUpForm() {
           />
         </div>
         <div className="post__detail-gap">
-          <h3>닉네임</h3>
+          <h4>닉네임</h4>
           <input
             type="text"
             className="post__datail-input"
@@ -96,7 +96,7 @@ export default function SignUpForm() {
           />
         </div>
         <div className="post__detail-gap">
-          <h3>비밀번호</h3>
+          <h4>비밀번호</h4>
           <input
             type="password"
             className="post__datail-input"
@@ -107,7 +107,7 @@ export default function SignUpForm() {
           />
         </div>
         <div className="post__detail-gap">
-          <h3>비밀번호 확인</h3>
+          <h4>비밀번호 확인</h4>
           <input
             type="password"
             className="post__datail-input"

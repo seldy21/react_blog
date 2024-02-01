@@ -4,6 +4,8 @@ import { deleteDoc, doc, getDoc } from "firebase/firestore";
 import { db } from "firebaseApp";
 import { deleteQuestionSwal, postProps } from "./postList";
 import { toast } from "react-toastify";
+import Comment from "./comment";
+import Loader from "./loader";
 
 export default function PostDetail() {
   const [post, setPost] = useState<postProps | null>(null);
@@ -42,26 +44,37 @@ export default function PostDetail() {
   return (
     <>
       <div className="post__detail">
-        <div className="post__box">
-          <div className="post__title">{post?.title}</div>
-        </div>
-        <div className="post__profile-box">
-          <div className="post__profile-img"></div>
-          <div className="post__author-name">{post?.email}</div>
-          <div className="post__date">{post?.createdAt}</div>
-        </div>
-        <div className="post__utils-box">
-          {post?.category && <div className="post__category">{post.category}</div>}
-          <div className="post__edit">
-            <Link to={`/posts/edit/${post?.id}`}>수정</Link>
-          </div>
-          <div className="post__delete" onClick={handleDelete}>
-            삭제
-          </div>
-        </div>
-        <div className="post__content post__content--pre-wrap">
-          {post?.content}
-        </div>
+        {post ? (
+          <>
+            <div className="post__box">
+              <div className="post__title">{post?.title}</div>
+            </div>
+            <div className="post__profile-box">
+              <div className="post__profile-img"></div>
+              <div className="post__author-name">{post?.email}</div>
+              <div className="post__date">{post?.createdAt}</div>
+            </div>
+            <div className="post__utils-box">
+              {post?.category && (
+                <div className="post__category">{post.category}</div>
+              )}
+              <div className="post__edit">
+                <Link to={`/posts/edit/${post?.id}`}>수정</Link>
+              </div>
+              <div className="post__delete" onClick={handleDelete}>
+                삭제
+              </div>
+            </div>
+            <div className="post__content post__content--pre-wrap">
+              {post?.content}
+            </div>
+            <Comment post={post} />
+          </>
+        ) : (
+          <>
+            <Loader />
+          </>
+        )}
       </div>
     </>
   );

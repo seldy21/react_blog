@@ -1,10 +1,19 @@
 import AuthContext from "context/authContext";
-import { collection, deleteDoc, doc, getDocs, orderBy, query, where } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
 import { db } from "firebaseApp";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import { Categories } from "./postForm";
 
 interface PostListProps {
   hasNavigation?: boolean;
@@ -21,10 +30,9 @@ export interface postProps {
   createdAt: string;
   updatedAt?: string;
   summary: string;
-  uid:string;
+  uid: string;
   category?: categoryType;
 }
-
 
 export type categoryType = "Frontend" | "Backend" | "Web" | "Native";
 
@@ -38,22 +46,32 @@ export const deleteQuestionSwal = () => {
   });
 };
 
-export default function PostList({ hasNavigation = true, defaultTab="all" }: PostListProps) {
+export default function PostList({
+  hasNavigation = true,
+  defaultTab = "all",
+}: PostListProps) {
   const { user } = useContext(AuthContext);
-  const [activeTab, setActiveTab] = useState<TapType>(defaultTab);
+  const [activeTab, setActiveTab] = useState<TapType | categoryType>(defaultTab);
   const [posts, setPosts] = useState<any[]>([]);
 
   const getPosts = async () => {
     setPosts([]);
     const postsRef = collection(db, "posts");
-    let postsQuery
+    let postsQuery;
     if (activeTab === "my" && user) {
       //show user's post
-      postsQuery = query(postsRef,where('email', "==", user.email), orderBy("createdAt", "desc"));
-    } else {
+      postsQuery = query(
+        postsRef,
+        where("email", "==", user.email),
+        orderBy("createdAt", "desc")
+      );
+    } else if (activeTab === "all") {
       //show all post
       postsQuery = query(postsRef, orderBy("createdAt", "desc"));
-    }
+    } else (
+      //show exact category
+      postsQuery = query(postsRef, where("category", "==", activeTab),orderBy("createdAt", "desc"))
+    )
     const data = await getDocs(postsQuery);
 
     data.forEach((doc) => {
@@ -116,6 +134,18 @@ export default function PostList({ hasNavigation = true, defaultTab="all" }: Pos
           >
             내가 쓴 글
           </div>
+          {Categories.map((item) => (
+            <div
+              key={item}
+              role="presentation"
+              className={activeTab === item ? "post__navigation--active" : ""}
+              onClick={() => {
+                setActiveTab(item);
+              }}
+            >
+              {item}
+            </div>
+          ))}
         </div>
       )}
       <div className="post__list">

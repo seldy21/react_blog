@@ -20,7 +20,7 @@ export interface postForm {
   category: categoryType | string;
 }
 
-const Categories: categoryType[] = ["Frontend", "Backend", "Web", "Native"];
+export const Categories: categoryType[] = ["Frontend", "Backend", "Web", "Native"];
 export default function PostForm() {
   const { user } = useContext(AuthContext);
   const [postData, setPostData] = useState<postProps | null>();
@@ -138,14 +138,6 @@ export default function PostForm() {
             </option>
           ))}
         </select>
-        {/* <input
-          type="text"
-          className="post__datail-input"
-          name="title"
-          placeholder="제목을 입력하세요"
-          value={inputValue.title}
-          onChange={handleInputValue}
-        /> */}
       </div>
       <div className="post__detail-gap">
         <h3>요약</h3>

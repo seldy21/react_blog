@@ -5,7 +5,7 @@ export default function MyCarousel() {
 
   const [imgList, setImgList] = useState([
     {
-      src: "https://i.pinimg.com/564x/06/23/32/062332d3b08dbd311204fb68692765ec.jpg",
+      src: "https://i.pinimg.com/originals/b5/1d/55/b51d55a75142ff0e16e6a321eca488f0.jpg",
     },
     {
       src: "https://i.pinimg.com/564x/47/eb/6e/47eb6e89cb52fa523fbb9e2939dde3d1.jpg",
