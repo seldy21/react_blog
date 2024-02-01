@@ -94,6 +94,7 @@ footer a:focus,
 
 .post__box {
   padding: 1.5rem 0;
+  transition: .3s;
 }
 
 .post__profile-box {
@@ -127,7 +128,7 @@ footer a:focus,
   color: gray;
 }
 
-.post__utils-box > div:hover {
+.post__utils-box .post__edit:hover, .post__utils-box .post__delete:hover {
   color: #000;
 }
 
@@ -399,4 +400,17 @@ footer a:focus,
 
 .pointer{
   cursor: pointer;
+}
+
+.post__detail select{
+  border: 1px solid lightgray;
+  height: 35px;
+  border-radius: 10px;
+  padding: 0 10px;
+}
+
+.post__category{
+  border:1px solid #efefef;
+  padding:3px 10px;
+  border-radius: 10px;
 }

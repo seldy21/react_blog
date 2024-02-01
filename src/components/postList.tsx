@@ -1,11 +1,14 @@
 import AuthContext from "context/authContext";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDocs, orderBy, query, where } from "firebase/firestore";
 import { db } from "firebaseApp";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 interface PostListProps {
   hasNavigation?: boolean;
+  defaultTab?: TapType;
 }
 
 type TapType = "all" | "my";
@@ -16,25 +19,80 @@ export interface postProps {
   email: string;
   content: string;
   createdAt: string;
+  updatedAt?: string;
   summary: string;
+  uid:string;
+  category?: categoryType;
 }
 
-export default function PostList({ hasNavigation = true }: PostListProps) {
+
+export type categoryType = "Frontend" | "Backend" | "Web" | "Native";
+
+export const deleteQuestionSwal = () => {
+  return Swal.fire({
+    icon: "question",
+    text: "삭제하시겠어요? 👻",
+    confirmButtonText: "확인",
+    showCancelButton: true,
+    cancelButtonText: "취소",
+  });
+};
+
+export default function PostList({ hasNavigation = true, defaultTab="all" }: PostListProps) {
   const { user } = useContext(AuthContext);
-  const [activeTab, setActiveTab] = useState<TapType>("all");
+  const [activeTab, setActiveTab] = useState<TapType>(defaultTab);
   const [posts, setPosts] = useState<any[]>([]);
 
   const getPosts = async () => {
-    const data = await getDocs(collection(db, "posts"));
+    setPosts([]);
+    const postsRef = collection(db, "posts");
+    let postsQuery
+    if (activeTab === "my" && user) {
+      //show user's post
+      postsQuery = query(postsRef,where('email', "==", user.email), orderBy("createdAt", "desc"));
+    } else {
+      //show all post
+      postsQuery = query(postsRef, orderBy("createdAt", "desc"));
+    }
+    const data = await getDocs(postsQuery);
 
     data.forEach((doc) => {
       const dataObj = { ...doc.data(), id: doc.id };
       setPosts((prev) => [...prev, dataObj as postProps]);
     });
   };
+
   useEffect(() => {
     getPosts();
-  }, []);
+  }, [activeTab]);
+
+  const deletePost = async (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    id: string
+  ) => {
+    deleteQuestionSwal().then(async (res) => {
+      if (res.isConfirmed) {
+        try {
+          await deleteDoc(doc(db, "posts", id));
+          toast.success("삭제되었습니다! 😇");
+
+          const targetPostBox = (e.target as HTMLElement).closest(
+            ".post__box"
+          ) as HTMLElement;
+          if (targetPostBox) {
+            targetPostBox.style.opacity = "0";
+            setTimeout(() => {
+              targetPostBox.style.height = "0";
+              targetPostBox.style.padding = "0";
+            }, 200);
+          }
+        } catch (err) {
+          console.log(err);
+          toast.warning("문제가 발생했습니다. 다시 시도해주세요. 😫");
+        }
+      }
+    });
+  };
 
   return (
     <>
@@ -78,7 +136,14 @@ export default function PostList({ hasNavigation = true }: PostListProps) {
                   <Link to={`/posts/edit/${item.id}`} className="post__edit">
                     수정
                   </Link>
-                  <div className="post__delete">삭제</div>
+                  <div
+                    className="post__delete"
+                    onClick={(e) => {
+                      deletePost(e, item.id);
+                    }}
+                  >
+                    삭제
+                  </div>
                 </div>
               )}
             </div>
