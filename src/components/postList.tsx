@@ -20,6 +20,13 @@ interface PostListProps {
   defaultTab?: TapType;
 }
 
+export interface CommentInterface {
+  content: string;
+  uid: string;
+  email: string;
+  createdAt: string;
+}
+
 type TapType = "all" | "my";
 
 export interface postProps {
@@ -32,6 +39,7 @@ export interface postProps {
   summary: string;
   uid: string;
   category?: categoryType;
+  comment?: CommentInterface[];
 }
 
 export type categoryType = "Frontend" | "Backend" | "Web" | "Native";
@@ -51,7 +59,9 @@ export default function PostList({
   defaultTab = "all",
 }: PostListProps) {
   const { user } = useContext(AuthContext);
-  const [activeTab, setActiveTab] = useState<TapType | categoryType>(defaultTab);
+  const [activeTab, setActiveTab] = useState<TapType | categoryType>(
+    defaultTab
+  );
   const [posts, setPosts] = useState<any[]>([]);
 
   const getPosts = async () => {
@@ -68,10 +78,13 @@ export default function PostList({
     } else if (activeTab === "all") {
       //show all post
       postsQuery = query(postsRef, orderBy("createdAt", "desc"));
-    } else (
+    } else
       //show exact category
-      postsQuery = query(postsRef, where("category", "==", activeTab),orderBy("createdAt", "desc"))
-    )
+      postsQuery = query(
+        postsRef,
+        where("category", "==", activeTab),
+        orderBy("createdAt", "desc")
+      );
     const data = await getDocs(postsQuery);
 
     data.forEach((doc) => {

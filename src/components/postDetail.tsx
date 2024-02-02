@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { deleteDoc, doc, getDoc } from "firebase/firestore";
 import { db } from "firebaseApp";
@@ -6,6 +6,7 @@ import { deleteQuestionSwal, postProps } from "./postList";
 import { toast } from "react-toastify";
 import Comment from "./comment";
 import Loader from "./loader";
+import AuthContext from "context/authContext";
 
 export default function PostDetail() {
   const [post, setPost] = useState<postProps | null>(null);
@@ -22,7 +23,7 @@ export default function PostDetail() {
     if (params?.id) {
       getData(params.id);
     }
-  }, []);
+  }, [post]);
 
   const handleDelete = () => {
     deleteQuestionSwal().then(async (res) => {
@@ -41,6 +42,8 @@ export default function PostDetail() {
     });
   };
 
+  const { user } = useContext(AuthContext);
+
   return (
     <>
       <div className="post__detail">
@@ -58,17 +61,21 @@ export default function PostDetail() {
               {post?.category && (
                 <div className="post__category">{post.category}</div>
               )}
-              <div className="post__edit">
-                <Link to={`/posts/edit/${post?.id}`}>수정</Link>
-              </div>
-              <div className="post__delete" onClick={handleDelete}>
-                삭제
-              </div>
+              {post.email === user?.email && (
+                <>
+                  <div className="post__edit">
+                    <Link to={`/posts/edit/${post?.id}`}>수정</Link>
+                  </div>
+                  <div className="post__delete" onClick={handleDelete}>
+                    삭제
+                  </div>
+                </>
+              )}
             </div>
             <div className="post__content post__content--pre-wrap">
               {post?.content}
             </div>
-            <Comment post={post} />
+            <Comment post={post} getData={getData} />
           </>
         ) : (
           <>
